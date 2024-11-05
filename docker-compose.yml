@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  # Backend service
+  backend:
+    build:
+      context: ./src/server
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/usr/src/app
+    environment:
+      - PORT=5000
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./src/client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/app
+    environment:
+      - PORT=3000
+    depends_on:
+      - backend
